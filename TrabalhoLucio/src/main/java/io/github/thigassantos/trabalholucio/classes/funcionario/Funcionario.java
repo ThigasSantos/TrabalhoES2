@@ -14,10 +14,10 @@ import java.util.List;
 public class Funcionario {
     private String nome;
     private String cpf;
-    private int ramal;
+    private String ramal;
     private List<Reserva> reservas;
 
-    public Funcionario(String nome, String cpf, double salario) {
+    public Funcionario(String nome, String cpf, String ramal) {
         this.nome = nome;
         this.cpf = cpf;
         this.ramal = ramal;
@@ -31,7 +31,7 @@ public class Funcionario {
         return cpf;
     }
 
-    public double getRamal() {
+    public String getRamal() {
         return ramal;
     }
 
@@ -43,7 +43,7 @@ public class Funcionario {
         this.cpf = cpf;
     }
 
-    public void setRamal(int ramal) {
+    public void setRamal(String ramal) {
         this.ramal = ramal;
     }
 
