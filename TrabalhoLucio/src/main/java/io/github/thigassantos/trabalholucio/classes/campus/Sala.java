@@ -4,7 +4,10 @@
  */
 package io.github.thigassantos.trabalholucio.classes.campus;
 
+import io.github.thigassantos.trabalholucio.classes.equipamento.Equipamento;
 import io.github.thigassantos.trabalholucio.classes.reserva.Reserva;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,53 +15,59 @@ import java.util.List;
  * @author Tygsv
  */
 public class Sala {   
-    //atributos
     private int numero;
-    private int quantidadeLugares;
-    private List<Reserva> reserva;
-    private Predio predio;
+    private int capacidade;
+    private boolean disponivel;
+    private List<Reserva> reservas;
 
-    //construtor
-    public Sala(int numero, int quantidadeLugares) {
+    public Sala(int numero, int capacidade) {
         this.numero = numero;
-        this.quantidadeLugares = quantidadeLugares;
+        this.capacidade = capacidade;
+        reservas = new ArrayList<>();
+    }
+
+    public Sala(int numero) {
+        this.numero = numero;
     }
     
-    //getters e setters
     public int getNumero() {
         return numero;
     }
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-    public int getQuantidadeLugares() {
-        return quantidadeLugares;
-    }
-    public void setQuantidadeLugares(int quantidadeLugares) {
-        this.quantidadeLugares = quantidadeLugares;
+
+    public int getCapacidade() {
+        return capacidade;
     }
 
-    public List<Reserva> getReserva() {
-        return reserva;
+    public void addReserva(Reserva reserva) {
+        reservas.add(reserva);
     }
 
-    public void setReserva(List<Reserva> reserva) {
-        this.reserva = reserva;
+    public void removeReserva(Reserva reserva) {
+        reservas.remove(reserva);
     }
 
-    public Predio getPredio() {
-        return predio;
-    }
-
-    public void setPredio(Predio predio) {
-        this.predio = predio;
+    public List<Reserva> getReservas() {
+        return reservas;
     }
     
-    //to string
-    @Override
-    public String toString() {
-        return "Sala{" + "numero=" + numero + ", quantidadeLugares=" + quantidadeLugares + ", reserva=" + reserva + ", predio=" + predio + '}';
+    public List<Reserva> getReservasPeriodo(LocalDateTime inicio, LocalDateTime fim) {
+    List<Reserva> reservasPeriodo = new ArrayList<>();
+    for (Reserva reserva : reservas) {
+        if (reserva.getDataHoraInicio().isBefore(fim) && reserva.getDataHoraFim().isAfter(inicio)) {
+            reservasPeriodo.add(reserva);
+        }
+    }
+    return reservasPeriodo;
     }
     
-
+    public boolean isDisponivel(LocalDateTime inicio, LocalDateTime fim){
+        if(getReservasPeriodo(inicio,fim)!= null){
+            disponivel = true;
+        }
+        else
+        {
+            disponivel = false;
+        }
+        return disponivel;
+    }
 }

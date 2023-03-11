@@ -4,6 +4,7 @@
  */
 package io.github.thigassantos.trabalholucio.classes.funcionario;
 
+import io.github.thigassantos.trabalholucio.classes.campus.Campus;
 import io.github.thigassantos.trabalholucio.classes.reserva.Reserva;
 import java.util.List;
 
@@ -13,55 +14,40 @@ import java.util.List;
  */
 public class Funcionario {
     private String nome;
-    private String cpf;
+    private String cargo;
     private String ramal;
-    private List<Reserva> reservas;
 
-    public Funcionario(String nome, String cpf, String ramal) {
+    public Funcionario(String nome, String cargo, String ramal) {
         this.nome = nome;
-        this.cpf = cpf;
+        this.cargo = cargo;
         this.ramal = ramal;
     }
 
+    // Getters e Setters
+
     public String getNome() {
         return nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public String getRamal() {
-        return ramal;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    public String getRamal() {
+        return ramal;
     }
 
     public void setRamal(String ramal) {
         this.ramal = ramal;
     }
 
-    public List<Reserva> getReservas() {
-        return reservas;
-    }
-
-    public void setReservas(List<Reserva> reservas) {
-        this.reservas = reservas;
-    }
-
-    //to string
-    @Override
-    public String toString() {
-        return "Funcionario{" + "nome=" + nome + ", cpf=" + cpf + ", ramal=" + ramal + ", reservas=" + reservas + '}';
-    }
-
-
-    
 }
 

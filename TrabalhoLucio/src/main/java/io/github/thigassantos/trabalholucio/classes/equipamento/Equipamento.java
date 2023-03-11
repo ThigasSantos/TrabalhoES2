@@ -11,32 +11,30 @@ package io.github.thigassantos.trabalholucio.classes.equipamento;
 public class Equipamento {  
 
     private String nome;
-    private int patrimonio;
+    private String patrimonio;
 
-    //construtor
-    public Equipamento(String nome, int patrimonio) {
+    public Equipamento(String nome, String patrimonio) {
         this.nome = nome;
         this.patrimonio = patrimonio;
     }
 
-    //getters e setters
+    // Getters e Setters
+
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public int getPatrimonio() {
+
+    public String getPatrimonio() {
         return patrimonio;
     }
-    public void setPatrimonio(int patrimonio) {
+
+    public void setPatrimonio(String patrimonio) {
         this.patrimonio = patrimonio;
     }
-
-    //toString
-    @Override
-    public String toString() {
-        return "Equipamento [nome=" + nome + ", patrimonio=" + patrimonio + "]";
-    }
+    
 
 }

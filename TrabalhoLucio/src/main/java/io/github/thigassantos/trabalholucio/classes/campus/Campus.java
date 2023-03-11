@@ -4,7 +4,9 @@
  */
 package io.github.thigassantos.trabalholucio.classes.campus;
 
+import io.github.thigassantos.trabalholucio.classes.equipamento.Equipamento;
 import io.github.thigassantos.trabalholucio.classes.funcionario.Funcionario;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,28 +16,55 @@ import java.util.List;
 public class Campus {   
     
     private String nome;
-    private String endereco;
-    private List<Predio> predios;
+    private Endereco endereco;
     private List<Funcionario> funcionarios;
-    
-    //construtor
-    public Campus(String nome, String endereco, List<Predio> predios) {
+    private List<Predio> predios;
+    private List<Equipamento> equipamentos;
+
+    public Campus(String nome, Endereco endereco) {
         this.nome = nome;
         this.endereco = endereco;
-        this.predios = predios;
+        this.funcionarios = new ArrayList<>();
+        this.predios = new ArrayList<>();
+        this.equipamentos = new ArrayList<>();
     }
-    //getters e setters
+
+    public void adicionarFuncionario(Funcionario funcionario) {
+        this.funcionarios.add(funcionario);
+    }
+
+    public void adicionarPredio(Predio predio) {
+        this.predios.add(predio);
+    }
+    
+    public void adicionarEquipamento(Equipamento equipamento) {
+        this.equipamentos.add(equipamento);
+    }
+
+    // Getters e Setters
+
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public String getEndereco() {
+
+    public Endereco getEndereco() {
         return endereco;
     }
-    public void setEndereco(String endereco) {
+
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
     }
 
     public List<Predio> getPredios() {
@@ -46,18 +75,14 @@ public class Campus {
         this.predios = predios;
     }
 
-    public List<Funcionario> getFuncionarios() {
-        return funcionarios;
+    public List<Equipamento> getEquipamentos() {
+        return equipamentos;
     }
 
-    public void setFuncionarios(List<Funcionario> funcionarios) {
-        this.funcionarios = funcionarios;
+    public void setEquipamentos(List<Equipamento> equipamentos) {
+        this.equipamentos = equipamentos;
     }
     
     
-    //toString
-    @Override
-    public String toString() {
-        return "Campus [nome=" + nome + ", endereco=" + endereco + "]";
-    }
+    
 }

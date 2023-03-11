@@ -4,6 +4,7 @@
  */
 package io.github.thigassantos.trabalholucio.classes.campus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,26 +14,25 @@ import java.util.List;
 public class Predio {   
     
     private String nome;
-    private int andares;
     private List<Sala> salas;
 
-    //construtor
-    public Predio(String nome, int andares) {
+    public Predio(String nome) {
         this.nome = nome;
-        this.andares = andares;
+        this.salas = new ArrayList<>();
     }
-    //getters e setters
+
+    public void adicionarSala(Sala sala) {
+        this.salas.add(sala);
+    }
+
+    // Getters e Setters
+
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
-    }
-    public int getAndares() {
-        return andares;
-    }
-    public void setAndares(int andares) {
-        this.andares = andares;
     }
 
     public List<Sala> getSalas() {
@@ -43,10 +43,4 @@ public class Predio {
         this.salas = salas;
     }
     
-    
-    //toString
-    @Override
-    public String toString() {
-        return "Predio [nome=" + nome + ", andares=" + andares + "]";
-    }
 }

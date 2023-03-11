@@ -8,7 +8,9 @@ import io.github.thigassantos.trabalholucio.classes.campus.Sala;
 import io.github.thigassantos.trabalholucio.classes.equipamento.Equipamento;
 import io.github.thigassantos.trabalholucio.classes.funcionario.Funcionario;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,82 +18,91 @@ import java.util.List;
  * @author Tygsv
  */
 public class Reserva {
-    //dataAlocaçao, hora inicio, hora fim, assunto, sala e funcionario
-    private int id;
-    private LocalDate dataAlocação;
-    private LocalTime horaInicio;
-    private LocalTime horaFim;
+    private LocalDateTime dataHoraInicio;
+    private LocalDateTime dataHoraFim;
     private String assunto;
     private Sala sala;
-    private Funcionario funcionario;
     private List<Equipamento> equipamentos;
-    
-    //contrutor
-    public Reserva(int id, LocalDate dataAlocação, LocalTime horaInicio, LocalTime horaFim, String assunto, Sala sala, Funcionario funcionario, List<Equipamento> equipamentos) {
-        this.id = id;
-        this.dataAlocação = dataAlocação;
-        this.horaInicio = horaInicio;
-        this.horaFim = horaFim;
+    private Funcionario responsavel;
+    private boolean ativa;
+
+
+    public Reserva(LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, String assunto, Sala sala, List<Equipamento> equipamentos , Funcionario responsavel) {
+        this.dataHoraInicio = dataHoraInicio;
+        this.dataHoraFim = dataHoraFim;
         this.assunto = assunto;
         this.sala = sala;
-        this.funcionario = funcionario;
         this.equipamentos = equipamentos;
+        this.responsavel = responsavel;
+        this.ativa = true;
     }
     
-    //getters e setters
-    public int getId() {
-        return id;
+    public boolean isAtiva() {
+    return ativa;
     }
-    public void setId(int id) {
-        this.id = id;
+
+    public void cancelar() {
+        this.ativa = false;
     }
-    public LocalDate getDataAlocação() {
-        return dataAlocação;
+
+    public Periodo getPeriodo() {
+        return new Periodo(dataHoraInicio, dataHoraFim);
     }
-    public void setDataAlocação(LocalDate dataAlocação) {
-        this.dataAlocação = dataAlocação;
+
+    public void adicionarEquipamento(Equipamento equipamento) {
+        this.equipamentos.add(equipamento);
     }
-    public LocalTime getHoraInicio() {
-        return horaInicio;
+
+// Getters e Setters
+    
+    //Getters e Setters
+    public LocalDateTime getDataHoraInicio() {
+        return dataHoraInicio;
     }
-    public void setHoraInicio(LocalTime horaInicio) {
-        this.horaInicio = horaInicio;
+
+    public void setDataHoraInicio(LocalDateTime dataHoraInicio) {
+        this.dataHoraInicio = dataHoraInicio;
     }
-    public LocalTime getHoraFim() {
-        return horaFim;
+
+    public LocalDateTime getDataHoraFim() {
+        return dataHoraFim;
     }
-    public void setHoraFim(LocalTime horaFim) {
-        this.horaFim = horaFim;
+
+    public void setDataHoraFim(LocalDateTime dataHoraFim) {
+        this.dataHoraFim = dataHoraFim;
     }
+
     public String getAssunto() {
         return assunto;
     }
+
     public void setAssunto(String assunto) {
         this.assunto = assunto;
     }
+
     public Sala getSala() {
         return sala;
     }
+
     public void setSala(Sala sala) {
         this.sala = sala;
     }
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
+
     public List<Equipamento> getEquipamentos() {
         return equipamentos;
     }
+
     public void setEquipamentos(List<Equipamento> equipamentos) {
         this.equipamentos = equipamentos;
     }
 
-    //toString
-    @Override
-    public String toString() {
-        return "Reserva{" + "id=" + id + ", dataAlocação=" + dataAlocação + ", horaInicio=" + horaInicio + ", horaFim=" + horaFim + ", assunto=" + assunto + ", sala=" + sala + ", funcionario=" + funcionario + ", equipamentos=" + equipamentos + '}';
+    public Funcionario getResponsavel() {
+        return responsavel;
     }
+
+    public void setResponsavel(Funcionario responsavel) {
+        this.responsavel = responsavel;
+    }
+    
 }
     
