@@ -18,6 +18,8 @@ import java.util.List;
  * @author Tygsv
  */
 public class Reserva {
+    private static int ultimoId =0;
+    private int id;
     private LocalDateTime dataHoraInicio;
     private LocalDateTime dataHoraFim;
     private String assunto;
@@ -35,10 +37,16 @@ public class Reserva {
         this.equipamentos = equipamentos;
         this.responsavel = responsavel;
         this.ativa = true;
+        ultimoId++;
+        id = ultimoId;
     }
     
     public boolean isAtiva() {
     return ativa;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void cancelar() {

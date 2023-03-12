@@ -61,13 +61,6 @@ public class Sala {
     }
     
     public boolean isDisponivel(LocalDateTime inicio, LocalDateTime fim){
-        if(getReservasPeriodo(inicio,fim)!= null){
-            disponivel = true;
-        }
-        else
-        {
-            disponivel = false;
-        }
-        return disponivel;
+        return getReservasPeriodo(inicio, fim).isEmpty();
     }
 }

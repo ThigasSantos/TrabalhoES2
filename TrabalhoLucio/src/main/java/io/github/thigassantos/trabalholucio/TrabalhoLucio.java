@@ -100,9 +100,6 @@ public class TrabalhoLucio {
             if (sala.isDisponivel(dataHora, dataHoraFim)) {
                 System.out.println(sala.getNumero());
             }
-            else{
-                System.out.println("Nenhuma sala disponivel na data e horario informados");
-            }
         }
         return  List.of(dataHora,dataHoraFim);
     }
@@ -110,7 +107,8 @@ public class TrabalhoLucio {
     private static void verificarOcupacao(Scanner scanner) {
         System.out.println("Digite o nome da sala que deseja verificar a ocupação:");
         int nomeSala = scanner.nextInt();
-
+        scanner.nextLine();
+        
         Sala salaSelecionada = null;
         for (Sala sala : salas) {
             if (sala.getNumero() == nomeSala) {
@@ -135,7 +133,7 @@ public class TrabalhoLucio {
 
         System.out.println("Reservas da sala " + salaSelecionada.getNumero() + " no período informado:");
         for (Reserva reserva : reservas) {
-            System.out.println(reserva);
+            System.out.println("ID da Reserva: " + reserva.getId() + "Hora de inicio:" + reserva.getDataHoraInicio() + "Hora Fim:" + reserva.getDataHoraFim());
         }              
     }
     
@@ -157,13 +155,21 @@ public class TrabalhoLucio {
         String adicionarEquipamentos = scanner.nextLine();
         List<Equipamento> equipamentoS = new ArrayList<>();
             if (adicionarEquipamentos.equalsIgnoreCase("S")) {            
-                System.out.println("Digite o nome do equipamento:");
+                System.out.println("Digite o nome do equipamento ou Digite 2 para concluir:");
                 for(Equipamento equipamento: equipamentos)
                 {
                     System.out.println(equipamento.getNome());
                 }
-                String nomeEquipamento = scanner.nextLine();               
-                equipamentoS.add(buscarEquipamento(equipamentos ,nomeEquipamento));
+                while(true){
+                    
+                    String nomeEquipamento = scanner.nextLine();
+                    
+                    if (nomeEquipamento.equalsIgnoreCase("2"))
+                        break;
+                    else
+                    equipamentoS.add(buscarEquipamento(equipamentos ,nomeEquipamento));
+                }
+                
             }
         
         System.out.println("Se identifique:");
@@ -171,7 +177,7 @@ public class TrabalhoLucio {
         Funcionario responsavel = buscarFuncionario(funcionarios, nomeFuncionario);       
         Reserva reserva = new Reserva( horaReserva.get(0),horaReserva.get(1), assunto, sala, equipamentoS, responsavel);
         sala.addReserva(reserva);
-        System.out.println("Reserva realizada com sucesso: " + reserva);
+        System.out.println("Reserva realizada com sucesso! Reserva numero:" + reserva.getId());
     
     }
     
