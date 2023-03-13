@@ -51,16 +51,25 @@ public class TrabalhoLucio {
         System.out.println("Bem-vindo ao sistema de reservas de salas!");
         System.out.println();
 
-        while (true) {
-            
+        while (true) {            
             System.out.println("Escolha o Campus:");
               for(Campus campusNow: campusTD)
               {
                 System.out.println(campusNow.getNome());
               }
             String nomeCampus = scanner.nextLine();           
-            Campus campusNow = buscarCampus(campusTD, nomeCampus);            
-            
+            Campus campusNow = buscarCampus(campusTD, nomeCampus); 
+           
+            while(true){               
+               if(campusNow == null){
+                System.out.println("Campus invalido digite novamente:");
+                nomeCampus = scanner.nextLine();           
+                campusNow = buscarCampus(campusTD, nomeCampus); 
+                }else{
+                   break;
+                }              
+            }
+                                        
             System.out.println("Escolha uma opção:");                                
             System.out.println("1. Verificar disponibilidade por data");
             System.out.println("2. Verificar ocupação da sala");
@@ -143,8 +152,8 @@ public class TrabalhoLucio {
         
         System.out.println("Selecione uma sala livre para realizar a reserva:");
         System.out.println("Digite o número da sala desejada:");
-        int numeroSala = scanner.nextInt();
         
+        int numeroSala = scanner.nextInt();   
         scanner.nextLine();
         
         Sala sala = buscarSala(salas, numeroSala);       
@@ -154,27 +163,37 @@ public class TrabalhoLucio {
         System.out.println("Deseja adicionar equipamentos à reserva? (S/N)");
         String adicionarEquipamentos = scanner.nextLine();
         List<Equipamento> equipamentoS = new ArrayList<>();
+        
             if (adicionarEquipamentos.equalsIgnoreCase("S")) {            
                 System.out.println("Digite o nome do equipamento ou Digite 2 para concluir:");
                 for(Equipamento equipamento: equipamentos)
                 {
                     System.out.println(equipamento.getNome());
                 }
-                while(true){
-                    
-                    String nomeEquipamento = scanner.nextLine();
-                    
+                while(true){                   
+                    String nomeEquipamento = scanner.nextLine();                   
                     if (nomeEquipamento.equalsIgnoreCase("2"))
                         break;
                     else
-                    equipamentoS.add(buscarEquipamento(equipamentos ,nomeEquipamento));
+                        equipamentoS.add(buscarEquipamento(equipamentos ,nomeEquipamento));
                 }
                 
             }
-        
+            
         System.out.println("Se identifique:");
         String nomeFuncionario = scanner.nextLine();
-        Funcionario responsavel = buscarFuncionario(funcionarios, nomeFuncionario);       
+        Funcionario responsavel = buscarFuncionario(funcionarios, nomeFuncionario);    
+        
+            while(true){
+                if(responsavel == null){
+                    System.out.println("Usuario invalido digite novamente:");
+                    nomeFuncionario = scanner.nextLine();
+                    responsavel = buscarFuncionario(funcionarios, nomeFuncionario); 
+                }else{
+                    break;
+                }
+            }  
+            
         Reserva reserva = new Reserva( horaReserva.get(0),horaReserva.get(1), assunto, sala, equipamentoS, responsavel);
         sala.addReserva(reserva);
         System.out.println("Reserva realizada com sucesso! Reserva numero:" + reserva.getId());

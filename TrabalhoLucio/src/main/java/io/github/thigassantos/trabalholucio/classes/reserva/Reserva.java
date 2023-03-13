@@ -53,17 +53,10 @@ public class Reserva {
         this.ativa = false;
     }
 
-    public Periodo getPeriodo() {
-        return new Periodo(dataHoraInicio, dataHoraFim);
-    }
-
     public void adicionarEquipamento(Equipamento equipamento) {
         this.equipamentos.add(equipamento);
     }
 
-// Getters e Setters
-    
-    //Getters e Setters
     public LocalDateTime getDataHoraInicio() {
         return dataHoraInicio;
     }
