@@ -142,8 +142,11 @@ public class TrabalhoLucio {
 
         System.out.println("Reservas da sala " + salaSelecionada.getNumero() + " no período informado:");
         for (Reserva reserva : reservas) {
-            System.out.println("ID da Reserva: " + reserva.getId() + "Hora de inicio:" + reserva.getDataHoraInicio() + "Hora Fim:" + reserva.getDataHoraFim());
-        }              
+            System.out.println("ID da Reserva: " + reserva.getId() + "  Hora de inicio: " + reserva.getDataHoraInicio() + "  Hora Fim: " + reserva.getDataHoraFim());
+        } 
+        if(reservas.isEmpty()){
+            System.out.println("Não existe reservas para essa sala!");
+        }
     }
     
     private static void realizarReserva(Scanner scanner, List<Equipamento> equipamentos) {
