@@ -20,15 +20,17 @@ import java.util.Scanner;
 
 public class TrabalhoLucio {  
     
+        //Banco de dados
         private static List<Sala> salas = new ArrayList<>();
         private static List<Campus> campusTD = new ArrayList<>();
         private static List<Funcionario> funcionarios = new ArrayList<>();
+        private static List<Reserva> reservas = new ArrayList<>();
         
     public static void main(String[] args) {
         
         
         
-        // Criação das salas
+        //Preencher banco
         salas.add(new Sala(1, 10));
         salas.add(new Sala(2, 20));
         salas.add(new Sala(3, 30));
@@ -46,6 +48,24 @@ public class TrabalhoLucio {
         campusA.adicionarEquipamento(tv);
         
         funcionarios.add(new Funcionario("Emily","Reitora","0154"));
+        funcionarios.add(new Funcionario("Fernanda","Professora","0134"));
+        funcionarios.add(new Funcionario("Thiago","Cordenador","0124"));
+        
+        
+        LocalDateTime horaInicio = LocalDateTime.parse("07/02/2023 14:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        LocalDateTime horaFim = LocalDateTime.parse("07/02/2023 17:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        
+        reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(1),null,funcionarios.get(2)));
+        
+        horaInicio = LocalDateTime.parse("10/02/2023 14:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        horaFim = LocalDateTime.parse("11/02/2023 17:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        
+        reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(1),null,funcionarios.get(2)));
+        
+        horaInicio = LocalDateTime.parse("10/02/2023 14:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        horaFim = LocalDateTime.parse("11/02/2023 17:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        
+        reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(2),null,funcionarios.get(1)));
         
         Scanner scanner = new Scanner(System.in);
         System.out.println("Bem-vindo ao sistema de reservas de salas!");
@@ -74,7 +94,8 @@ public class TrabalhoLucio {
             System.out.println("1. Verificar disponibilidade por data");
             System.out.println("2. Verificar ocupação da sala");
             System.out.println("3. Realizar reserva de sala");
-            System.out.println("4. Sair");
+            System.out.println("4. Verificar reservas do funcionario");
+            System.out.println("5. Sair");
 
             int opcao = scanner.nextInt();
             scanner.nextLine();
@@ -86,6 +107,8 @@ public class TrabalhoLucio {
             } else if (opcao == 3) {
                 realizarReserva(scanner,campusNow.getEquipamentos());
             } else if (opcao == 4) {
+                verificarReservasFuncionario(scanner);
+            } else if (opcao == 5) {
                 System.out.println("Saindo do sistema de reservas de salas...");
                 break;
             } else {
@@ -120,7 +143,7 @@ public class TrabalhoLucio {
     }
 
     private static void verificarOcupacao(Scanner scanner) {
-        System.out.println("Digite o nome da sala que deseja verificar a ocupação:");
+        System.out.println("Digite o numero da sala que deseja verificar a ocupação:");
         int nomeSala = scanner.nextInt();
         scanner.nextLine();
         
@@ -215,6 +238,7 @@ public class TrabalhoLucio {
             }  
             
         Reserva reserva = new Reserva( horaReserva.get(0),horaReserva.get(1), assunto, sala, equipamentoS, responsavel);
+        reservas.add(reserva);
         sala.addReserva(reserva);
         System.out.println("Reserva realizada com sucesso! Reserva numero:" + reserva.getId());
     
@@ -278,9 +302,35 @@ public class TrabalhoLucio {
             }  
             
         Reserva reserva = new Reserva( horaReserva.get(0),horaReserva.get(1), assunto, sala, equipamentoS, responsavel);
+        reservas.add(reserva);
         sala.addReserva(reserva);
         System.out.println("Reserva realizada com sucesso! Reserva numero:" + reserva.getId());
     
+    }
+    
+    private static void verificarReservasFuncionario(Scanner scanner){
+        System.out.println("Digite o funcionario para olhar suas reservas:");
+        String nomeFuncionario = scanner.nextLine();
+        
+        Funcionario func = buscarFuncionario(funcionarios,nomeFuncionario);
+        
+        while(true){
+            if(func == null)
+            {
+                System.out.println("Nome do funcionario digitado errado, digite novamente:");
+                nomeFuncionario = scanner.nextLine();
+                func = buscarFuncionario(funcionarios, nomeFuncionario);
+            }else
+                break;
+        }
+        
+        System.out.println("Essas são as reservas feitas:");
+        for(Reserva reserva: reservas){
+            if (reserva.getResponsavel().getNome().equalsIgnoreCase(nomeFuncionario)) {
+                System.out.println("ID: "+reserva.getId()+"  Sala: "+reserva.getSala().getNumero() +"  Horario inicio: "+reserva.getDataHoraInicio()+"  Horario fim: "+reserva.getDataHoraFim()+"  Ativa: "+reserva.isAtiva() );
+            }
+        }
+        
     }
     
     public static Equipamento buscarEquipamento(List<Equipamento> equipamentos, String nome) {
@@ -314,6 +364,15 @@ public class TrabalhoLucio {
     for (Sala sala : salas) {
         if (sala.getNumero() == numero) {
             return sala;
+        }
+    }
+    return null;
+    }
+    
+    public static Reserva buscarReserva(List<Reserva> reservas, String nomeFuncionario) {
+    for (Reserva reserva : reservas) {
+        if (reserva.getResponsavel().getNome().equalsIgnoreCase(nomeFuncionario)) {
+            return reserva;
         }
     }
     return null;
