@@ -29,7 +29,7 @@ public class TrabalhoLucio {
     public static void main(String[] args) {
         
         
-        
+        //<editor-fold defaultstate="collapsed" desc="Preenchimento do Banco">
         //Preencher banco
         salas.add(new Sala(1, 10));
         salas.add(new Sala(2, 20));
@@ -66,7 +66,9 @@ public class TrabalhoLucio {
         horaFim = LocalDateTime.parse("11/02/2023 17:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         
         reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(2),null,funcionarios.get(1)));
+        //</editor-fold>
         
+        //<editor-fold defaultstate="collapsed" desc="Sistema">
         Scanner scanner = new Scanner(System.in);
         System.out.println("Bem-vindo ao sistema de reservas de salas!");
         System.out.println();
@@ -116,6 +118,8 @@ public class TrabalhoLucio {
             }
             System.out.println();
         }
+        //</editor-fold>
+               
     }
 
     private static List<LocalDateTime> verificarDisponibilidade(Scanner scanner, List<Equipamento> equipamentos) {
