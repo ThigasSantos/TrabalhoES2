@@ -129,7 +129,7 @@ public class ReservaControler {
                     if (nomeEquipamento.equalsIgnoreCase("2"))
                         break;
                     else if(buscarEquipamento(equipamentos ,nomeEquipamento) == null)
-                        System.out.println("Equipamento não encontrado");
+                        System.out.println("Equipamento não encontrado digite novamente:");
                     else
                         equipamentoS.add(buscarEquipamento(equipamentos ,nomeEquipamento));
                 }
