@@ -20,6 +20,10 @@ public class Predio {
         this.nome = nome;
         this.salas = new ArrayList<>();
     }
+    
+    public Predio() {
+      
+    }
 
     public void adicionarSala(Sala sala) {
         this.salas.add(sala);

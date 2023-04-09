@@ -6,6 +6,7 @@ package io.github.thigassantos.trabalholucio;
 
 import io.github.thigassantos.trabalholucio.classes.campus.Campus;
 import io.github.thigassantos.trabalholucio.classes.campus.Endereco;
+import io.github.thigassantos.trabalholucio.classes.campus.Predio;
 import io.github.thigassantos.trabalholucio.classes.campus.Sala;
 import io.github.thigassantos.trabalholucio.classes.equipamento.Equipamento;
 import io.github.thigassantos.trabalholucio.classes.funcionario.Funcionario;
@@ -25,6 +26,7 @@ public class PreencheBanco {
     //Banco de dados
         private  List<Sala> salas = new ArrayList<>();
         private  List<Campus> campusTD = new ArrayList<>();
+        private  List<Predio> predioTD = new ArrayList<>();
         private  List<Funcionario> funcionarios = new ArrayList<>();
         private  List<Reserva> reservas = new ArrayList<>();
 
@@ -38,6 +40,9 @@ public class PreencheBanco {
 
     public List<Campus> getCampusTD() {
         return campusTD;
+    }
+    public List<Predio> getPredioTD() {
+        return predioTD;
     }
 
     public void setCampusTD(List<Campus> campusTD) {

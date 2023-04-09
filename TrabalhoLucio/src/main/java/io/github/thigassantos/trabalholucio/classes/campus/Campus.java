@@ -28,6 +28,11 @@ public class Campus {
         this.predios = new ArrayList<>();
         this.equipamentos = new ArrayList<>();
     }
+    
+    public Campus()
+    {
+ 
+    }
 
     public void adicionarFuncionario(Funcionario funcionario) {
         this.funcionarios.add(funcionario);

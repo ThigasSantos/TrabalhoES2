@@ -10,7 +10,7 @@ import io.github.thigassantos.trabalholucio.classes.equipamento.Equipamento;
 import io.github.thigassantos.trabalholucio.classes.funcionario.Funcionario;
 import io.github.thigassantos.trabalholucio.classes.reserva.Reserva;
 import static io.github.thigassantos.trabalholucio.controladores.FuncionarioControler.buscarFuncionario;
-import static io.github.thigassantos.trabalholucio.controladores.LugarControler.buscarEquipamento;
+import static io.github.thigassantos.trabalholucio.controladores.EquipamentoControler.buscarEquipamento;
 import static io.github.thigassantos.trabalholucio.controladores.LugarControler.buscarSala;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
