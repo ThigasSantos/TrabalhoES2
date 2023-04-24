@@ -47,4 +47,13 @@ public class Predio {
         this.salas = salas;
     }
     
+    public Sala buscarSala( int numero) {
+    for (Sala sala : this.salas) {
+        if (sala.getNumero() == numero) {
+            return sala;
+        }
+    }
+    return null;
+    }
+    
 }

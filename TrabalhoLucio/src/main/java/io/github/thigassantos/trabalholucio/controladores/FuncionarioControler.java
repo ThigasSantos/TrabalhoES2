@@ -5,6 +5,7 @@
 package io.github.thigassantos.trabalholucio.controladores;
 
 import io.github.thigassantos.trabalholucio.classes.funcionario.Funcionario;
+import io.github.thigassantos.trabalholucio.classes.reserva.Reserva;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,18 +14,26 @@ import java.util.Scanner;
  * @author Tygsv
  */
 public class FuncionarioControler {
-    
-    public static Funcionario buscarFuncionario(List<Funcionario> funcionarios, String nome) {
-    for (Funcionario funcionario : funcionarios) {
-        if (funcionario.getNome().equalsIgnoreCase(nome)) {
-            return funcionario;
+      
+    public List<Reserva> buscarReservaFunc(List<Funcionario> funcionarios, String nomeFuncionario) {
+    for (Funcionario func : funcionarios) {
+        if (func.getNome().equalsIgnoreCase(nomeFuncionario)) {
+            return func.getReservas();
         }
     }
     return null;
     }
     
+    public Funcionario buscarFuncionario(List<Funcionario> funcionarios, String nomeFuncionario){
+        for(Funcionario func : funcionarios){
+            if (func.getNome().equalsIgnoreCase(nomeFuncionario)) {
+                return func;
+            }
+        }
+        return null;
+    }
     
-    public static Funcionario cadastrarFuncionario(){
+    public Funcionario cadastrarFuncionario(){
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Digite o nome do funcionário");

@@ -11,7 +11,6 @@ import io.github.thigassantos.trabalholucio.classes.campus.Sala;
 import io.github.thigassantos.trabalholucio.classes.equipamento.Equipamento;
 import io.github.thigassantos.trabalholucio.classes.funcionario.Funcionario;
 import io.github.thigassantos.trabalholucio.classes.reserva.Reserva;
-import static io.github.thigassantos.trabalholucio.controladores.LugarControler.buscarCampus;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -25,6 +24,7 @@ public class PreencheBanco {
     
     //Banco de dados
         private  List<Sala> salas = new ArrayList<>();
+        private  List<Equipamento> equipamentos = new ArrayList<>();
         private  List<Campus> campusTD = new ArrayList<>();
         private  List<Predio> predioTD = new ArrayList<>();
         private  List<Funcionario> funcionarios = new ArrayList<>();
@@ -74,9 +74,9 @@ public class PreencheBanco {
         salas.add(new Sala(3, 30));
         
         Endereco end = new Endereco("MOC","Rua A","Bairro Aquele lá", 13);
-        campusTD.add(new Campus("Campus A", end));
+        Campus campusA = new Campus("Campus A", end);
+        campusTD.add(campusA);
         
-        Campus campusA = buscarCampus(campusTD,"Campus A");
         Equipamento dataShow = new Equipamento("DataShow","1542");
         Equipamento som = new Equipamento("Som","6523");
         Equipamento tv = new Equipamento("TV","4221");

@@ -88,6 +88,30 @@ public class Campus {
         this.equipamentos = equipamentos;
     }
     
+    public Predio buscarPredio( String nome ) {
+    for (Predio predio : this.predios) {
+        if (predio.getNome().equalsIgnoreCase(nome)) {
+            return predio;
+        }
+    }
+    return null;
+    }
     
+    public Equipamento buscarEquipamento( String nome ) {
+    for (Equipamento equipamento : this.equipamentos) {
+        if (equipamento.getNome().equalsIgnoreCase(nome)) {
+            return equipamento;
+        }
+    }
+    return null;
+    }
     
+    public Funcionario buscarFuncionario( String nome) {
+    for (Funcionario funcionario : this.funcionarios) {
+        if (funcionario.getNome().equalsIgnoreCase(nome)) {
+            return funcionario;
+        }
+    }
+    return null;
+    }
 }

@@ -8,7 +8,8 @@ import io.github.thigassantos.trabalholucio.classes.campus.Campus;
 import io.github.thigassantos.trabalholucio.classes.campus.Endereco;
 import io.github.thigassantos.trabalholucio.classes.campus.Predio;
 import io.github.thigassantos.trabalholucio.classes.campus.Sala;
-import static io.github.thigassantos.trabalholucio.controladores.FuncionarioControler.buscarFuncionario;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,15 +19,15 @@ import java.util.Scanner;
  */
 public class LugarControler {
     
-     public static Sala buscarSala(List<Sala> salas, int numero) {
-    for (Sala sala : salas) {
-        if (sala.getNumero() == numero) {
-            return sala;
+    public Campus buscarCampus(List<Campus> campusTD, String nome) {
+    for (Campus campus : campusTD) {
+        if (campus.getNome().equalsIgnoreCase(nome)) {
+            return campus;
         }
     }
     return null;
     }
-     
+          
     public static Campus cadastrarCampus(List<Campus> campusTD){
         Scanner scanner = new Scanner(System.in);
         
@@ -56,7 +57,53 @@ public class LugarControler {
         return campus;
     }
     
-    public static Predio cadastrarPredio(List<Campus> campusTD){
+    public List<Sala> getSalasCampus(Campus campus){
+        List<Predio> predios = campus.getPredios();
+        List<Sala> salas = new ArrayList<>();
+        for (Predio predio : predios) {           
+            salas.addAll(predio.getSalas());                  
+        }
+        
+        return salas;
+    }
+    
+    public void exibirSalas(Campus campus){
+        
+        List<Predio> predios = campus.getPredios();
+        for (Predio predio : predios) {
+            System.out.println("Predio: "+predio.getNome());
+            for (Sala sala : predio.getSalas()) { 
+                System.out.println("Sala Numero: "+sala.getNumero()+" Capacidade: "+ sala.getCapacidade());
+            }          
+        }
+    }
+    
+    public Sala acharSala(Campus campus,int numSala){
+        List<Predio> predios = campus.getPredios();
+        Sala sala;
+        for (Predio predio : predios) {
+            sala = predio.buscarSala(numSala);
+            if(sala != null)
+            {
+                return sala;
+            }
+        } 
+        return null;
+    }
+    
+    public void exibirSalasDisponiveis(Campus campus, List<LocalDateTime> dataHora){
+        List<Predio> predios = campus.getPredios();
+        
+        for (Predio predio : predios) {
+            for (Sala sala : predio.getSalas()) {     
+                if (sala.isDisponivel(dataHora.get(0), dataHora.get(1))) {
+                System.out.println("Sala Numero: "+sala.getNumero()+" Capacidade: "+ sala.getCapacidade());
+                }
+            }          
+        }
+    }
+    
+    public Predio cadastrarPredio(List<Campus> campusTD){
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Digite o nome do campus");
@@ -81,7 +128,7 @@ public class LugarControler {
         campus.adicionarPredio(predio);
          return predio;
     }
-    public static Sala cadastrarSala(List<Campus> campusTD,List<Predio> predioTD){
+    public Sala cadastrarSala(List<Campus> campusTD,List<Predio> predioTD){
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Digite o nome do campus");
@@ -94,7 +141,7 @@ public class LugarControler {
             {
                 System.out.println("Nome do campus digitado errado, digite novamente:");
                 nome_campus = scanner.nextLine();
-                campus= buscarCampus(campusTD,nome_campus);
+                campus = buscarCampus(campusTD,nome_campus);
             }else
                 break;
         }
@@ -105,13 +152,13 @@ public class LugarControler {
         String nome_predio = scanner.nextLine();
         
         Predio predio = new Predio();
-        predio = buscarPredio(predioTD, nome_predio);
+        predio = campus.buscarPredio( nome_predio);
         while(true){
             if(predio == null)
             {
                 System.out.println("Nome do predio digitado errado, digite novamente:");
                 nome_predio = scanner.nextLine();
-                predio = buscarPredio(predioTD,nome_predio);
+                predio = campus.buscarPredio(nome_predio);
             }else
                 break;
         }
@@ -129,22 +176,5 @@ public class LugarControler {
         predio.adicionarSala(sala);
          return sala;
     }
-   
-    public static Campus buscarCampus(List<Campus> campusTD, String nome) {
-    for (Campus campus : campusTD) {
-        if (campus.getNome().equalsIgnoreCase(nome)) {
-            return campus;
-        }
-    }
-    return null;
-    }
     
-    public static Predio buscarPredio(List<Predio> predioTD, String nome) {
-    for (Predio predio : predioTD) {
-        if (predio.getNome().equalsIgnoreCase(nome)) {
-            return predio;
-        }
-    }
-    return null;
-    }
 }

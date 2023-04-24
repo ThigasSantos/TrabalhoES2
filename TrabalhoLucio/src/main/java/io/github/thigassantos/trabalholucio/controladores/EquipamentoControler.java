@@ -36,13 +36,4 @@ public class EquipamentoControler {
  
         return equipamento;
     }
-    
-    public static Equipamento buscarEquipamento(List<Equipamento> equipamentos, String nome) {
-    for (Equipamento equipamento : equipamentos) {
-        if (equipamento.getNome().equalsIgnoreCase(nome)) {
-            return equipamento;
-        }
-    }
-    return null;
-    }
 }

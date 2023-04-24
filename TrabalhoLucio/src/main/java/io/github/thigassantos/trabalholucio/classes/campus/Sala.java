@@ -4,7 +4,6 @@
  */
 package io.github.thigassantos.trabalholucio.classes.campus;
 
-import io.github.thigassantos.trabalholucio.classes.equipamento.Equipamento;
 import io.github.thigassantos.trabalholucio.classes.reserva.Reserva;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -63,4 +62,5 @@ public class Sala {
     public boolean isDisponivel(LocalDateTime inicio, LocalDateTime fim){
         return getReservasPeriodo(inicio, fim).isEmpty();
     }
+    
 }
