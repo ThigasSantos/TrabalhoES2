@@ -137,6 +137,6 @@ public class ReservaControler {
         for(Reserva reserva: logado.getReservas()){
                 System.out.println("ID: "+reserva.getId()+"  Sala: "+reserva.getSala().getNumero() +"  Horario inicio: "+reserva.getDataHoraInicio()+"  Horario fim: "+reserva.getDataHoraFim()+"  Ativa: "+reserva.isAtiva() );    
         }       
-    }
+    }   
     
 }

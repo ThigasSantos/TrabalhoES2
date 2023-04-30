@@ -7,10 +7,7 @@ package io.github.thigassantos.trabalholucio.classes.reserva;
 import io.github.thigassantos.trabalholucio.classes.campus.Sala;
 import io.github.thigassantos.trabalholucio.classes.equipamento.Equipamento;
 import io.github.thigassantos.trabalholucio.classes.funcionario.Funcionario;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,8 +38,12 @@ public class Reserva {
         id = ultimoId;
     }
     
+    public boolean verificaEquipamento(Equipamento equipamento) {
+        return equipamentos.contains(equipamento);
+    }
+    
     public boolean isAtiva() {
-    return ativa;
+        return ativa;
     }
 
     public int getId() {

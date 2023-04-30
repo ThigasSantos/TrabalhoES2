@@ -9,6 +9,9 @@ import io.github.thigassantos.trabalholucio.classes.campus.Endereco;
 import io.github.thigassantos.trabalholucio.classes.campus.Predio;
 import io.github.thigassantos.trabalholucio.classes.campus.Sala;
 import io.github.thigassantos.trabalholucio.classes.equipamento.Equipamento;
+import io.github.thigassantos.trabalholucio.classes.equipamento.tipos.EquipamentoAudio;
+import io.github.thigassantos.trabalholucio.classes.equipamento.tipos.EquipamentoNotebook;
+import io.github.thigassantos.trabalholucio.classes.equipamento.tipos.EquipamentoVideo;
 import io.github.thigassantos.trabalholucio.classes.funcionario.Funcionario;
 import io.github.thigassantos.trabalholucio.classes.reserva.Reserva;
 import java.time.LocalDateTime;
@@ -29,7 +32,8 @@ public class PreencheBanco {
         private  List<Predio> predioTD = new ArrayList<>();
         private  List<Funcionario> funcionarios = new ArrayList<>();
         private  List<Reserva> reservas = new ArrayList<>();
-
+    
+    //<editor-fold defaultstate="collapsed" desc="Getters e Setters">    
     public List<Sala> getSalas() {
         return salas;
     }
@@ -64,7 +68,23 @@ public class PreencheBanco {
     public void setReservas(List<Reserva> reservas) {
         this.reservas = reservas;
     }      
-        
+    //</editor-fold>
+
+    // Campo estático privado da própria classe
+    private static PreencheBanco instance;
+
+    // Construtor privado da classe
+    private PreencheBanco() {}
+
+    // Método estático que retorna a única instância da classe
+    public static PreencheBanco getInstance() {
+        if (instance == null) {
+            instance = new PreencheBanco();
+            instance.preencherBanco(); // chamada ao método preencherBanco para preencher os dados
+        }
+        return instance;
+    }
+    
     public void preencherBanco(){
             
         //<editor-fold defaultstate="collapsed" desc="Preenchimento do Banco">
@@ -77,13 +97,17 @@ public class PreencheBanco {
         Campus campusA = new Campus("Campus A", end);
         campusTD.add(campusA);
         
-        Equipamento dataShow = new Equipamento("DataShow","1542");
-        Equipamento som = new Equipamento("Som","6523");
-        Equipamento tv = new Equipamento("TV","4221");
+        EquipamentoVideo dataShow = new EquipamentoVideo("DataShow","Samsung");
+        EquipamentoVideo dataShow2 = new EquipamentoVideo("DataShow","Samsung");
+        EquipamentoAudio som = new EquipamentoAudio("Som",350);
+        EquipamentoVideo tv = new EquipamentoVideo("TV","LG");
+        EquipamentoNotebook notebook = new EquipamentoNotebook("Notebook","Dell","x5264",27,16);
         
         campusA.adicionarEquipamento(dataShow);
+        campusA.adicionarEquipamento(dataShow2);
         campusA.adicionarEquipamento(som);
         campusA.adicionarEquipamento(tv);
+        campusA.adicionarEquipamento(notebook);
         
         funcionarios.add(new Funcionario("Emily","Reitora","0154"));
         funcionarios.add(new Funcionario("Fernanda","Professora","0134"));

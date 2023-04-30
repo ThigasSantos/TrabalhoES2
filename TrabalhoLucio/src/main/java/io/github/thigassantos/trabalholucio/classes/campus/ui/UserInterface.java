@@ -19,35 +19,36 @@ import java.util.Scanner;
  */
 public class UserInterface {   
     
-    private PreencheBanco banco = new PreencheBanco();
     private LugarControler lug = new LugarControler();
     private EquipamentoControler equi = new EquipamentoControler();
     private ReservaControler res = new ReservaControler();
     private FuncionarioControler fun = new FuncionarioControler();
     
-    public void ExibirInterface(){
+    public void ExibirInterface(PreencheBanco banco){
         
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Bem-vindo ao Book a Room!");
-            System.out.println();
-
-            System.out.println("Faça login para continuar");
-            System.out.println();
-            System.out.println("Nome:");
-            String nomeFuncionario = scanner.nextLine();
-            Funcionario logado = fun.buscarFuncionario(banco.getFuncionarios() , nomeFuncionario);
-                while(true){
-                    if(logado == null){
-                        System.out.println("Login incorreto tente novamente:");
-                        nomeFuncionario = scanner.nextLine();   
-                        logado = fun.buscarFuncionario(banco.getFuncionarios(), nomeFuncionario);
-                    }else
-                        break;           
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Bem-vindo ao Book a Room!");
+        System.out.println();
+        
+        System.out.println(banco.getFuncionarios());
+        
+        System.out.println("Faça login para continuar");
+        System.out.println();
+        System.out.println("Nome:");
+        String nomeFuncionario = scanner.nextLine();
+        Funcionario logado = fun.buscarFuncionario(banco.getFuncionarios() , nomeFuncionario);
+            while(true){
+                if(logado == null){
+                    System.out.println("Login incorreto tente novamente:");
+                    nomeFuncionario = scanner.nextLine();   
+                    logado = fun.buscarFuncionario(banco.getFuncionarios(), nomeFuncionario);
+                }else
+                    break;           
                 }
-            menuLogado(scanner, logado);             
+        menuLogado(scanner, logado, banco);             
     }
     
-    public void menuLogado(Scanner scanner, Funcionario logado){
+    public void menuLogado(Scanner scanner, Funcionario logado,PreencheBanco banco){
         
         while(true){
             

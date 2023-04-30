@@ -10,9 +10,10 @@ public class TrabalhoLucio {
               
     public static void main(String[] args) {
         
-        PreencheBanco banco = new PreencheBanco();
-        UserInterface uInterface = new UserInterface();
+        PreencheBanco banco = PreencheBanco.getInstance();
         banco.preencherBanco();
-        uInterface.ExibirInterface();
+        
+        UserInterface uInterface = new UserInterface();       
+        uInterface.ExibirInterface(banco);
     }   
 }

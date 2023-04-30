@@ -17,23 +17,31 @@ public class EquipamentoControler {
     /**
      *
      * @return
-     */
-    public static Equipamento cadastrarEquipamento(){
+     */  
+    public Equipamento cadastrarEquipamento(){
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Digite o nome do equipamento");
         String nome = scanner.nextLine();
-        System.out.println("Digite o patrimonio do equipamento");
-        String patrimonio = scanner.nextLine();
         
         // validações adicionais
         if (nome.isEmpty()) {
-            System.out.println("O nome do patrimonio é obrigatório.");
+            System.out.println("O nome do equipamento é obrigatório.");
             return null;
         }
         
-        Equipamento equipamento = new Equipamento(nome,patrimonio);
+        Equipamento equipamento = new Equipamento(nome);
  
         return equipamento;
     }
+    
+    public boolean existeEquipamento(List<Equipamento> equipamentos,String nome){
+        for (Equipamento equipamento : equipamentos) {
+        if (equipamento.getNome().equals(nome)) {
+            return true;
+        }
+    }
+        return false;
+    }
+    
 }
