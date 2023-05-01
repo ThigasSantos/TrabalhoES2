@@ -125,6 +125,18 @@ public class PreencheBanco {
         Campus campusA = new Campus("Campus A", end);
         campusTD.add(campusA);
         
+        Predio predioA = new Predio("Administrativo");
+        Predio predioB = new Predio("Predio 1");
+        campusA.adicionarPredio(predioB);
+        campusA.adicionarPredio(predioA);
+        
+        predioA.adicionarSala(salas.get(0));
+        predioB.adicionarSala(salas.get(1));
+        predioB.adicionarSala(salas.get(2));
+        
+        predioTD.add(predioA);
+        predioTD.add(predioB);
+        
         EquipamentoVideo dataShow = new EquipamentoVideo("DataShow","Samsung");
         EquipamentoVideo dataShow2 = new EquipamentoVideo("DataShow","Samsung");
         EquipamentoAudio som = new EquipamentoAudio("Som",350);

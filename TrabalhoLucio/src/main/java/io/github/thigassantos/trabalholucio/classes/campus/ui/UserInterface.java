@@ -123,7 +123,7 @@ public class UserInterface {
         scanner.nextLine();
 
             if (opcao == 1) {
-                res.verificarDisponibilidade(scanner, campus, logado );
+                res.verificarDisponibilidade(scanner, campus, logado);
             } else if (opcao == 2) {
                 res.verificarOcupacao(scanner,campus);
             } else if (opcao == 3) {

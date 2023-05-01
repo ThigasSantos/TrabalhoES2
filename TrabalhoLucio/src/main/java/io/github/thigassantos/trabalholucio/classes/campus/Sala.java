@@ -51,7 +51,7 @@ public class Sala {
     
     public List<Reserva> getReservasPeriodo(LocalDateTime inicio, LocalDateTime fim) {
     List<Reserva> reservasPeriodo = new ArrayList<>();
-    for (Reserva reserva : reservas) {
+    for (Reserva reserva : this.reservas) {
         if (reserva.getDataHoraInicio().isBefore(fim) && reserva.getDataHoraFim().isAfter(inicio)) {
             reservasPeriodo.add(reserva);
         }
