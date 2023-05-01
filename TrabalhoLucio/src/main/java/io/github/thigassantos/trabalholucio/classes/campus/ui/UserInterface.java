@@ -19,18 +19,17 @@ import java.util.Scanner;
  */
 public class UserInterface {   
     
+    private PreencheBanco banco = PreencheBanco.getInstance();
     private LugarControler lug = new LugarControler();
     private EquipamentoControler equi = new EquipamentoControler();
     private ReservaControler res = new ReservaControler();
     private FuncionarioControler fun = new FuncionarioControler();
     
-    public void ExibirInterface(PreencheBanco banco){
+    public void ExibirInterface(){
         
         Scanner scanner = new Scanner(System.in);
         System.out.println("Bem-vindo ao Book a Room!");
         System.out.println();
-        
-        System.out.println(banco.getFuncionarios());
         
         System.out.println("Faça login para continuar");
         System.out.println();
@@ -76,11 +75,11 @@ public class UserInterface {
                 scanner.nextLine();
 
                 if(opcao == 1){
-                    lug.cadastrarCampus(banco.getCampusTD());
+                    lug.cadastrarCampus();
                 }else if(opcao == 2){
-                    lug.cadastrarPredio(banco.getCampusTD());
+                    lug.cadastrarPredio();
                 }else if(opcao == 3){
-                     lug.cadastrarSala(banco.getCampusTD(),banco.getPredioTD());
+                     lug.cadastrarSala();
                 }else if(opcao == 4){
                     equi.cadastrarEquipamento();
                 }else if(opcao == 5){
@@ -92,14 +91,16 @@ public class UserInterface {
             } else if (opcao == 2) {
 
                 System.out.println("Bem vindo ao Menu de reservas");
-                System.out.println("Digite um Campus para continuar:");    
+                System.out.println("Digite um Campus para continuar:");  
+                
                 String nomeCampus = scanner.nextLine();
-                Campus campus = lug.buscarCampus(banco.getCampusTD(), nomeCampus);
+                Campus campus = lug.buscarCampus(nomeCampus);
+                
                 while(true){
-                    if(logado == null){
+                    if(campus == null){
                         System.out.println("Campus incorreto tente novamente:");
                         nomeCampus = scanner.nextLine();   
-                        campus = lug.buscarCampus(banco.getCampusTD(), nomeCampus);
+                        campus = lug.buscarCampus( nomeCampus);
                     }else
                         break;           
                 }

@@ -14,6 +14,7 @@ import io.github.thigassantos.trabalholucio.classes.equipamento.tipos.Equipament
 import io.github.thigassantos.trabalholucio.classes.equipamento.tipos.EquipamentoVideo;
 import io.github.thigassantos.trabalholucio.classes.funcionario.Funcionario;
 import io.github.thigassantos.trabalholucio.classes.reserva.Reserva;
+import io.github.thigassantos.trabalholucio.classes.reserva.TipoReserva;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -67,14 +68,41 @@ public class PreencheBanco {
 
     public void setReservas(List<Reserva> reservas) {
         this.reservas = reservas;
-    }      
+    }
+    
+    public void addReserva(Reserva reserva) {
+        reservas.add(reserva);
+    }
+    
+    public void addSala(Sala sala) {
+        salas.add(sala);
+    }
+    
+    public void addEquipamento(Equipamento eqp) {
+        equipamentos.add(eqp);
+    }
+    
+    public void addFuncionario(Funcionario func) {
+        funcionarios.add(func);
+    }
+    
+    public void addCampus(Campus camp) {
+        campusTD.add(camp);
+    }
+    
+    public void addPredio(Predio predio) {
+        predioTD.add(predio);
+    }
+    
     //</editor-fold>
 
     // Campo estático privado da própria classe
     private static PreencheBanco instance;
 
     // Construtor privado da classe
-    private PreencheBanco() {}
+    private PreencheBanco() {
+    
+    }
 
     // Método estático que retorna a única instância da classe
     public static PreencheBanco getInstance() {
@@ -117,17 +145,17 @@ public class PreencheBanco {
         LocalDateTime horaInicio = LocalDateTime.parse("07/02/2023 14:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         LocalDateTime horaFim = LocalDateTime.parse("07/02/2023 17:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         
-        reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(1),null,funcionarios.get(2)));
+        reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(1),null,funcionarios.get(2),TipoReserva.AULA));
         
         horaInicio = LocalDateTime.parse("10/02/2023 14:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         horaFim = LocalDateTime.parse("11/02/2023 17:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         
-        reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(1),null,funcionarios.get(2)));
+        reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(1),null,funcionarios.get(2),TipoReserva.REUNIAO));
         
         horaInicio = LocalDateTime.parse("10/02/2023 14:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         horaFim = LocalDateTime.parse("11/02/2023 17:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         
-        reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(2),null,funcionarios.get(1)));
+        reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(2),null,funcionarios.get(1),TipoReserva.REUNIAO));
         //</editor-fold>
         
         }

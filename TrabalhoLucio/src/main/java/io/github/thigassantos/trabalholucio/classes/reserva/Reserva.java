@@ -24,9 +24,10 @@ public class Reserva {
     private List<Equipamento> equipamentos;
     private Funcionario responsavel;
     private boolean ativa;
+    private TipoReserva tipoReserva;
 
 
-    public Reserva(LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, String assunto, Sala sala, List<Equipamento> equipamentos , Funcionario responsavel) {
+    public Reserva(LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, String assunto, Sala sala, List<Equipamento> equipamentos , Funcionario responsavel, TipoReserva tipoReserva) {
         this.dataHoraInicio = dataHoraInicio;
         this.dataHoraFim = dataHoraFim;
         this.assunto = assunto;
@@ -34,6 +35,7 @@ public class Reserva {
         this.equipamentos = equipamentos;
         this.responsavel = responsavel;
         this.ativa = true;
+        this.tipoReserva = tipoReserva;
         ultimoId++;
         id = ultimoId;
     }
@@ -48,6 +50,14 @@ public class Reserva {
 
     public int getId() {
         return id;
+    }
+
+    public TipoReserva getTipoReserva() {
+        return tipoReserva;
+    }
+
+    public void setTipoReserva(TipoReserva tipoReserva) {
+        this.tipoReserva = tipoReserva;
     }
 
     public void cancelar() {

@@ -4,6 +4,7 @@
  */
 package io.github.thigassantos.trabalholucio.controladores;
 
+import io.github.thigassantos.trabalholucio.PreencheBanco;
 import io.github.thigassantos.trabalholucio.classes.funcionario.Funcionario;
 import io.github.thigassantos.trabalholucio.classes.reserva.Reserva;
 import java.util.List;
@@ -14,7 +15,9 @@ import java.util.Scanner;
  * @author Tygsv
  */
 public class FuncionarioControler {
-      
+    
+    private PreencheBanco banco = PreencheBanco.getInstance();
+    
     public List<Reserva> buscarReservaFunc(List<Funcionario> funcionarios, String nomeFuncionario) {
     for (Funcionario func : funcionarios) {
         if (func.getNome().equalsIgnoreCase(nomeFuncionario)) {
@@ -33,7 +36,7 @@ public class FuncionarioControler {
         return null;
     }
     
-    public Funcionario cadastrarFuncionario(){
+    public void cadastrarFuncionario(){
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Digite o nome do funcionário");
@@ -47,11 +50,11 @@ public class FuncionarioControler {
         // validações adicionais
         if (nome.isEmpty()) {
             System.out.println("O nome do funcionario é obrigatório.");
-            return null;
+            return;
         }
         
         Funcionario funcionario = new Funcionario(nome,cargo,ramal);
+        banco.addFuncionario(funcionario);
  
-        return funcionario;
     }
 }

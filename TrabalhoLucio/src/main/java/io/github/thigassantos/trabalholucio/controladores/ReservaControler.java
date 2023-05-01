@@ -5,11 +5,13 @@
 package io.github.thigassantos.trabalholucio.controladores;
 
 
+import io.github.thigassantos.trabalholucio.PreencheBanco;
 import io.github.thigassantos.trabalholucio.classes.campus.Campus;
 import io.github.thigassantos.trabalholucio.classes.campus.Sala;
 import io.github.thigassantos.trabalholucio.classes.equipamento.Equipamento;
 import io.github.thigassantos.trabalholucio.classes.funcionario.Funcionario;
 import io.github.thigassantos.trabalholucio.classes.reserva.Reserva;
+import io.github.thigassantos.trabalholucio.classes.reserva.TipoReserva;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import java.util.Scanner;
 public class ReservaControler {
     
     LugarControler lug = new LugarControler();
+    PreencheBanco banco = PreencheBanco.getInstance();
     
     public List<LocalDateTime> pegarHorario(Scanner scanner){
         System.out.println("Digite o período que deseja (formato dd/MM/yyyy HH:mm - dd/MM/yyyy HH:mm):");
@@ -44,7 +47,7 @@ public class ReservaControler {
       
         System.out.println("Deseja realizar uma reserva ? S/N");       
         if(scanner.nextLine().equalsIgnoreCase("S"))
-            realizarReserva(scanner,campus,List.of(dataHora.get(0),dataHora.get(1)),logado);
+            realizarReserva(scanner,campus,dataHora,logado);
                    
     }
 
@@ -81,7 +84,7 @@ public class ReservaControler {
         }
     }
     
-    public Reserva realizarReserva(Scanner scanner,Campus campus,List<LocalDateTime> horaReserva,Funcionario logado) {
+    public void realizarReserva(Scanner scanner,Campus campus,List<LocalDateTime> horaReserva,Funcionario logado) {
             
         System.out.println("Selecione uma sala livre para realizar a reserva:");
         
@@ -110,7 +113,10 @@ public class ReservaControler {
                 System.out.println("Digite o nome do equipamento ou Digite 2 para concluir:");
                 for(Equipamento equipamento: campus.getEquipamentos())
                 {
-                    System.out.println(equipamento.getNome());
+                    if(equipamento.isDisponivel(horaReserva.get(0), horaReserva.get(1))){
+                      System.out.println("Nome: "+equipamento.getNome()+" Patrimonio: "+equipamento.getPatrimonio());  
+                    }
+                   
                 }
                 while(true){                   
                     String nomeEquipamento = scanner.nextLine();                   
@@ -124,11 +130,14 @@ public class ReservaControler {
                 
             }
                  
-        Reserva reserva = new Reserva( horaReserva.get(0),horaReserva.get(1), assunto, sala, equipamentoS, logado);
+        Reserva reserva = new Reserva( horaReserva.get(0),horaReserva.get(1), assunto, sala, equipamentoS, logado,TipoReserva.REUNIAO);
         sala.addReserva(reserva);
-        System.out.println("Reserva realizada com sucesso! Reserva numero:" + reserva.getId());
+        for(Equipamento equipamento: equipamentoS){
+            equipamento.addReserva(reserva);
+        }
         
-        return reserva;   
+        System.out.println("Reserva realizada com sucesso! Reserva numero:" + reserva.getId());        
+        banco.addReserva(reserva);
     }
     
     public void verificarReservasFuncionario(Scanner scanner, Campus campus, Funcionario logado){
@@ -137,6 +146,6 @@ public class ReservaControler {
         for(Reserva reserva: logado.getReservas()){
                 System.out.println("ID: "+reserva.getId()+"  Sala: "+reserva.getSala().getNumero() +"  Horario inicio: "+reserva.getDataHoraInicio()+"  Horario fim: "+reserva.getDataHoraFim()+"  Ativa: "+reserva.isAtiva() );    
         }       
-    }   
+    } 
     
 }

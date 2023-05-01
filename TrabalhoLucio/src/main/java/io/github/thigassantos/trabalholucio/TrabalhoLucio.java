@@ -14,6 +14,6 @@ public class TrabalhoLucio {
         banco.preencherBanco();
         
         UserInterface uInterface = new UserInterface();       
-        uInterface.ExibirInterface(banco);
+        uInterface.ExibirInterface();
     }   
 }

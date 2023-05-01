@@ -4,6 +4,7 @@
  */
 package io.github.thigassantos.trabalholucio.controladores;
 
+import io.github.thigassantos.trabalholucio.PreencheBanco;
 import io.github.thigassantos.trabalholucio.classes.campus.Campus;
 import io.github.thigassantos.trabalholucio.classes.campus.Endereco;
 import io.github.thigassantos.trabalholucio.classes.campus.Predio;
@@ -19,8 +20,10 @@ import java.util.Scanner;
  */
 public class LugarControler {
     
-    public Campus buscarCampus(List<Campus> campusTD, String nome) {
-    for (Campus campus : campusTD) {
+    private PreencheBanco banco = PreencheBanco.getInstance();
+    
+    public Campus buscarCampus(String nome) {
+    for (Campus campus : banco.getCampusTD()) {
         if (campus.getNome().equalsIgnoreCase(nome)) {
             return campus;
         }
@@ -28,7 +31,7 @@ public class LugarControler {
     return null;
     }
           
-    public static Campus cadastrarCampus(List<Campus> campusTD){
+    public void cadastrarCampus(){
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Digite o nome do campus");
@@ -48,13 +51,12 @@ public class LugarControler {
         // validações adicionais
         if (nome.isEmpty()) {
             System.out.println("O nome do campus é obrigatório.");
-            return null;
+            return;
         }
         
         Endereco endereco = new Endereco(cidade,rua,bairro,numero);
         Campus campus = new Campus(nome, endereco);
-        campusTD.add(campus);
-        return campus;
+        banco.addCampus(campus);
     }
     
     public List<Sala> getSalasCampus(Campus campus){
@@ -103,20 +105,20 @@ public class LugarControler {
         }
     }
     
-    public Predio cadastrarPredio(List<Campus> campusTD){
+    public void cadastrarPredio(){
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Digite o nome do campus");
         String nome_campus = scanner.nextLine();
         
         Campus campus = new Campus();
-        campus = buscarCampus(campusTD, nome_campus);
+        campus = buscarCampus( nome_campus);
         while(true){
             if(campus == null)
             {
                 System.out.println("Nome do campus digitado errado, digite novamente:");
                 nome_campus = scanner.nextLine();
-                campus= buscarCampus(campusTD,nome_campus);
+                campus= buscarCampus(nome_campus);
             }else
                 break;
         }
@@ -126,27 +128,27 @@ public class LugarControler {
         
         Predio predio = new Predio(nome_predio);
         campus.adicionarPredio(predio);
-         return predio;
+        banco.addPredio(predio);
     }
-    public Sala cadastrarSala(List<Campus> campusTD,List<Predio> predioTD){
+    public void cadastrarSala(){
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Digite o nome do campus");
         String nome_campus = scanner.nextLine();
         
         Campus campus = new Campus();
-        campus = buscarCampus(campusTD, nome_campus);
+        campus = buscarCampus( nome_campus);
         while(true){
             if(campus == null)
             {
                 System.out.println("Nome do campus digitado errado, digite novamente:");
                 nome_campus = scanner.nextLine();
-                campus = buscarCampus(campusTD,nome_campus);
+                campus = buscarCampus(nome_campus);
             }else
                 break;
         }
         
-        predioTD = campus.getPredios();
+        List<Predio> predioTD = campus.getPredios();
         
         System.out.println("Digite o nome do predio");
         String nome_predio = scanner.nextLine();
@@ -161,8 +163,7 @@ public class LugarControler {
                 predio = campus.buscarPredio(nome_predio);
             }else
                 break;
-        }
-        
+        }       
         
         System.out.println("Digite o número da sala");
         int numero = scanner.nextInt();
@@ -174,7 +175,7 @@ public class LugarControler {
         
         Sala sala = new Sala(numero, capacidade);
         predio.adicionarSala(sala);
-         return sala;
+        banco.addSala(sala);
     }
     
 }
