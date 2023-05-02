@@ -153,12 +153,14 @@ public class PreencheBanco {
         funcionarios.add(new Funcionario("Fernanda","Professora","0134"));
         funcionarios.add(new Funcionario("Thiago","Cordenador","0124"));
         
+        campusA.adicionarFuncionario(funcionarios.get(0));
+        campusA.adicionarFuncionario(funcionarios.get(1));
+        campusA.adicionarFuncionario(funcionarios.get(2));
         
         LocalDateTime horaInicio = LocalDateTime.parse("07/02/2023 14:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         LocalDateTime horaFim = LocalDateTime.parse("07/02/2023 17:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         
-        reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(1),null,funcionarios.get(2),TipoReserva.AULA));
-        
+        reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(1),null,funcionarios.get(2),TipoReserva.AULA));     
         horaInicio = LocalDateTime.parse("10/02/2023 14:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         horaFim = LocalDateTime.parse("11/02/2023 17:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         
@@ -168,6 +170,14 @@ public class PreencheBanco {
         horaFim = LocalDateTime.parse("11/02/2023 17:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         
         reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(2),null,funcionarios.get(1),TipoReserva.REUNIAO));
+        
+        Funcionario func = funcionarios.get(0);
+        func.addReserva(reservas.get(2));
+        
+        func = funcionarios.get(1);
+        func.addReserva(reservas.get(0));
+        func.addReserva(reservas.get(1));
+        
         //</editor-fold>
         
         }

@@ -5,6 +5,7 @@
 package io.github.thigassantos.trabalholucio.classes.funcionario;
 
 import io.github.thigassantos.trabalholucio.classes.reserva.Reserva;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +22,7 @@ public class Funcionario {
         this.nome = nome;
         this.cargo = cargo;
         this.ramal = ramal;
+        this.reservas = new ArrayList<>();
     }
 
     // Getters e Setters
@@ -56,6 +58,9 @@ public class Funcionario {
     public void setReservas(List<Reserva> reservas) {
         this.reservas = reservas;
     }
-      
+    
+    public void addReserva(Reserva res){
+        reservas.add(res);
+    }
 }
 
