@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package io.github.thigassantos.trabalholucio.classes.campus.ui;
+package io.github.thigassantos.trabalholucio.classes.ui;
 
 import io.github.thigassantos.trabalholucio.PreencheBanco;
 import io.github.thigassantos.trabalholucio.classes.campus.Campus;

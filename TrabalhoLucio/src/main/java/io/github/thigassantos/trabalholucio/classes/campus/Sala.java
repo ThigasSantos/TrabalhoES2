@@ -55,8 +55,8 @@ public class Sala {
     public List<Reserva> getReservasPeriodo(List<LocalDate> periodo, List<LocalTime> horario){
         List<Reserva> reservasPeriodo = new ArrayList<>();
         for (Reserva reserva : this.reservas) {
-               if (reserva.getPeriodo().get(0).isBefore(periodo.get(0)) && reserva.getPeriodo().get(1).isAfter(periodo.get(1))) {
-                   if(reserva.getHorario().get(0).isBefore(horario.get(0)) && reserva.getHorario().get(1).isAfter(horario.get(1)))
+               if (reserva.getPeriodo().get(0).isBefore(periodo.get(1)) && reserva.getPeriodo().get(1).isAfter(periodo.get(0))) {
+                   if(reserva.getHorario().get(0).isBefore(horario.get(1)) && reserva.getHorario().get(1).isAfter(horario.get(0)))
                     reservasPeriodo.add(reserva);
                 }       
         }
@@ -69,7 +69,7 @@ public class Sala {
             for(int i=0;i<diasAula.size();i++)
             {
                if (reserva.getPeriodo().get(0).isBefore(diasAula.get(i)) && reserva.getPeriodo().get(1).isAfter(diasAula.get(i))) {
-                   if(reserva.getHorario().get(0).isBefore(horario.get(0)) && reserva.getHorario().get(1).isAfter(horario.get(1)))
+                   if(reserva.getHorario().get(0).isBefore(horario.get(1)) && reserva.getHorario().get(1).isAfter(horario.get(0)))
                        if(reserva.getTipoReserva() == TipoReserva.AULA)
                        reservasPeriodo.add(reserva);
                 } 

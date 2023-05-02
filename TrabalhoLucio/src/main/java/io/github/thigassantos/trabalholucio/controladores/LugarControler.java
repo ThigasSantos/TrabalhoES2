@@ -10,7 +10,6 @@ import io.github.thigassantos.trabalholucio.classes.campus.Endereco;
 import io.github.thigassantos.trabalholucio.classes.campus.Predio;
 import io.github.thigassantos.trabalholucio.classes.campus.Sala;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;

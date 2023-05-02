@@ -4,7 +4,7 @@
  */
 
 package io.github.thigassantos.trabalholucio;
-import io.github.thigassantos.trabalholucio.classes.campus.ui.UserInterface;
+import io.github.thigassantos.trabalholucio.classes.ui.UserInterface;
 
 public class TrabalhoLucio {  
               

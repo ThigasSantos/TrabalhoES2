@@ -167,6 +167,8 @@ public class PreencheBanco {
         horario.add(LocalTime.parse("17:20", DateTimeFormatter.ofPattern("HH:mm")));
         
         reservas.add(new Reserva(periodo,horario,"palestra bem legal",salas.get(1),null,funcionarios.get(2),TipoReserva.REUNIAO));
+        Sala sala = salas.get(1);
+        sala.addReserva(reservas.get(0));
         
         periodo = new ArrayList<>();
         periodo.add(LocalDate.parse("10/02/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
@@ -175,7 +177,9 @@ public class PreencheBanco {
         horario.add(LocalTime.parse("11:00", DateTimeFormatter.ofPattern("HH:mm")));
         horario.add(LocalTime.parse("13:20", DateTimeFormatter.ofPattern("HH:mm")));
         
-        reservas.add(new Reserva(periodo,horario,"aula",salas.get(1),null,funcionarios.get(2),TipoReserva.REUNIAO));
+        reservas.add(new Reserva(periodo,horario,"palestra sobre como formar",salas.get(1),null,funcionarios.get(2),TipoReserva.REUNIAO));
+        sala = salas.get(1);
+        sala.addReserva(reservas.get(1));
         
         periodo = new ArrayList<>();
         periodo.add(LocalDate.parse("07/02/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
@@ -187,6 +191,9 @@ public class PreencheBanco {
         List<Integer> dias = new ArrayList<>();
         dias = List.of(1,3,4);
         reservas.add(new ReservaAula(periodo,horario,"Calculo",salas.get(2),null,funcionarios.get(1),TipoReserva.AULA, dias));
+        sala = salas.get(2);
+        sala.addReserva(reservas.get(2));
+        
         Funcionario func = funcionarios.get(1);
         func.addReserva(reservas.get(2));
         
