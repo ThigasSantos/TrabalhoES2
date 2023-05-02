@@ -5,7 +5,10 @@
 package io.github.thigassantos.trabalholucio.classes.equipamento;
 
 import io.github.thigassantos.trabalholucio.classes.reserva.Reserva;
+import io.github.thigassantos.trabalholucio.classes.reserva.TipoReserva;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,17 +57,38 @@ public class Equipamento {
         reservas.add(res);
     }
     
-    public List<Reserva> getReservasPeriodo(LocalDateTime inicio, LocalDateTime fim) {
-    List<Reserva> reservasPeriodo = new ArrayList<>();
-    for (Reserva reserva : reservas) {
-        if (reserva.getDataHoraInicio().isBefore(fim) && reserva.getDataHoraFim().isAfter(inicio)) {
-            reservasPeriodo.add(reserva);
+    public List<Reserva> getReservasPeriodo(List<LocalDate> periodo, List<LocalTime> horario){
+        List<Reserva> reservasPeriodo = new ArrayList<>();
+        for (Reserva reserva : this.reservas) {
+               if (reserva.getPeriodo().get(0).isBefore(periodo.get(0)) && reserva.getPeriodo().get(1).isAfter(periodo.get(1))) {
+                   if(reserva.getHorario().get(0).isBefore(horario.get(0)) && reserva.getHorario().get(1).isAfter(horario.get(1)))
+                    reservasPeriodo.add(reserva);
+                }       
         }
-    }
-    return reservasPeriodo;
+        return reservasPeriodo;
     }
     
-    public boolean isDisponivel(LocalDateTime inicio, LocalDateTime fim){
-        return getReservasPeriodo(inicio, fim).isEmpty();
+    public List<Reserva> getReservasAula(List<LocalDate> diasAula, List<LocalTime> horario){
+        List<Reserva> reservasPeriodo = new ArrayList<>();
+        for (Reserva reserva : this.reservas) {
+            for(int i=0;i<diasAula.size();i++)
+            {
+               if (reserva.getPeriodo().get(0).isBefore(diasAula.get(i)) && reserva.getPeriodo().get(1).isAfter(diasAula.get(i))) {
+                   if(reserva.getHorario().get(0).isBefore(horario.get(0)) && reserva.getHorario().get(1).isAfter(horario.get(1)))
+                       if(reserva.getTipoReserva() == TipoReserva.AULA)
+                       reservasPeriodo.add(reserva);
+                } 
+            }
+            
+        }
+        return reservasPeriodo;
+    }
+    
+    public boolean isDisponivel(List<LocalDate> periodo, List<LocalTime> horario){
+        return getReservasPeriodo(periodo, horario).isEmpty();
+    }
+    
+    public boolean isDisponivelAula(List<LocalDate> periodo, List<LocalTime> horario){
+        return getReservasAula(periodo, horario).isEmpty();
     }
 }

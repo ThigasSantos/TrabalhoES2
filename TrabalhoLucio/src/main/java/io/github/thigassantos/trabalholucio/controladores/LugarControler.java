@@ -9,7 +9,9 @@ import io.github.thigassantos.trabalholucio.classes.campus.Campus;
 import io.github.thigassantos.trabalholucio.classes.campus.Endereco;
 import io.github.thigassantos.trabalholucio.classes.campus.Predio;
 import io.github.thigassantos.trabalholucio.classes.campus.Sala;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -93,12 +95,24 @@ public class LugarControler {
         return null;
     }
     
-    public void exibirSalasDisponiveis(Campus campus, List<LocalDateTime> dataHora){
+    public void exibirSalasDisponiveis(Campus campus, List<LocalDate> periodo, List<LocalTime> horario){
         List<Predio> predios = campus.getPredios();
         
         for (Predio predio : predios) {
             for (Sala sala : predio.getSalas()) {     
-                if (sala.isDisponivel(dataHora.get(0), dataHora.get(1))) {
+                if (sala.isDisponivel(periodo, horario)) {
+                System.out.println("Sala Numero: "+sala.getNumero()+" Capacidade: "+ sala.getCapacidade());
+                }
+            }          
+        }
+    }
+    
+    public void exibirSalasDisponiveisAula(Campus campus, List<LocalDate> periodo, List<LocalTime> horario){
+        List<Predio> predios = campus.getPredios();
+        
+        for (Predio predio : predios) {
+            for (Sala sala : predio.getSalas()) {     
+                if (sala.isDisponivelAula(periodo, horario)) {
                 System.out.println("Sala Numero: "+sala.getNumero()+" Capacidade: "+ sala.getCapacidade());
                 }
             }          
@@ -130,6 +144,7 @@ public class LugarControler {
         campus.adicionarPredio(predio);
         banco.addPredio(predio);
     }
+    
     public void cadastrarSala(){
         Scanner scanner = new Scanner(System.in);
         

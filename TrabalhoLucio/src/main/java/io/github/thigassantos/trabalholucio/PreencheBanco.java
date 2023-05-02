@@ -15,7 +15,9 @@ import io.github.thigassantos.trabalholucio.classes.equipamento.tipos.Equipament
 import io.github.thigassantos.trabalholucio.classes.funcionario.Funcionario;
 import io.github.thigassantos.trabalholucio.classes.reserva.Reserva;
 import io.github.thigassantos.trabalholucio.classes.reserva.TipoReserva;
-import java.time.LocalDateTime;
+import io.github.thigassantos.trabalholucio.classes.reserva.tipos.ReservaAula;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -157,20 +159,34 @@ public class PreencheBanco {
         campusA.adicionarFuncionario(funcionarios.get(1));
         campusA.adicionarFuncionario(funcionarios.get(2));
         
-        LocalDateTime horaInicio = LocalDateTime.parse("07/02/2023 14:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-        LocalDateTime horaFim = LocalDateTime.parse("07/02/2023 17:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        List<LocalDate> periodo = new ArrayList<>();
+        periodo.add(LocalDate.parse("07/02/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        periodo.add(LocalDate.parse("07/02/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        List<LocalTime> horario = new ArrayList<>();
+        horario.add(LocalTime.parse("15:20", DateTimeFormatter.ofPattern("HH:mm")));
+        horario.add(LocalTime.parse("17:20", DateTimeFormatter.ofPattern("HH:mm")));
         
-        reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(1),null,funcionarios.get(2),TipoReserva.AULA));     
-        horaInicio = LocalDateTime.parse("10/02/2023 14:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-        horaFim = LocalDateTime.parse("11/02/2023 17:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        reservas.add(new Reserva(periodo,horario,"palestra bem legal",salas.get(1),null,funcionarios.get(2),TipoReserva.REUNIAO));
         
-        reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(1),null,funcionarios.get(2),TipoReserva.REUNIAO));
+        periodo = new ArrayList<>();
+        periodo.add(LocalDate.parse("10/02/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        periodo.add(LocalDate.parse("10/02/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        horario = new ArrayList<>();
+        horario.add(LocalTime.parse("11:00", DateTimeFormatter.ofPattern("HH:mm")));
+        horario.add(LocalTime.parse("13:20", DateTimeFormatter.ofPattern("HH:mm")));
         
-        horaInicio = LocalDateTime.parse("10/02/2023 14:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-        horaFim = LocalDateTime.parse("11/02/2023 17:20", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        reservas.add(new Reserva(periodo,horario,"aula",salas.get(1),null,funcionarios.get(2),TipoReserva.REUNIAO));
         
-        reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(2),null,funcionarios.get(1),TipoReserva.REUNIAO));
+        periodo = new ArrayList<>();
+        periodo.add(LocalDate.parse("07/02/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        periodo.add(LocalDate.parse("12/06/2023", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        horario = new ArrayList<>();
+        horario.add(LocalTime.parse("11:00", DateTimeFormatter.ofPattern("HH:mm")));
+        horario.add(LocalTime.parse("12:40", DateTimeFormatter.ofPattern("HH:mm")));
         
+        List<Integer> dias = new ArrayList<>();
+        dias = List.of(1,3,4);
+        reservas.add(new ReservaAula(periodo,horario,"Calculo",salas.get(2),null,funcionarios.get(1),TipoReserva.AULA, dias));
         Funcionario func = funcionarios.get(1);
         func.addReserva(reservas.get(2));
         

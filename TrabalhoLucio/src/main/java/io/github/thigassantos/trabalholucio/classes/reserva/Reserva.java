@@ -7,7 +7,9 @@ package io.github.thigassantos.trabalholucio.classes.reserva;
 import io.github.thigassantos.trabalholucio.classes.campus.Sala;
 import io.github.thigassantos.trabalholucio.classes.equipamento.Equipamento;
 import io.github.thigassantos.trabalholucio.classes.funcionario.Funcionario;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -17,8 +19,8 @@ import java.util.List;
 public class Reserva {
     private static int ultimoId =0;
     private int id;
-    private LocalDateTime dataHoraInicio;
-    private LocalDateTime dataHoraFim;
+    private List<LocalDate> periodo;
+    private List<LocalTime> horario;
     private String assunto;
     private Sala sala;
     private List<Equipamento> equipamentos;
@@ -27,9 +29,9 @@ public class Reserva {
     private TipoReserva tipoReserva;
 
 
-    public Reserva(LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, String assunto, Sala sala, List<Equipamento> equipamentos , Funcionario responsavel, TipoReserva tipoReserva) {
-        this.dataHoraInicio = dataHoraInicio;
-        this.dataHoraFim = dataHoraFim;
+    public Reserva(List<LocalDate> periodo, List<LocalTime> horario, String assunto, Sala sala, List<Equipamento> equipamentos , Funcionario responsavel, TipoReserva tipoReserva) {
+        this.periodo = periodo;
+        this.horario = horario;
         this.assunto = assunto;
         this.sala = sala;
         this.equipamentos = equipamentos;
@@ -68,22 +70,6 @@ public class Reserva {
         this.equipamentos.add(equipamento);
     }
 
-    public LocalDateTime getDataHoraInicio() {
-        return dataHoraInicio;
-    }
-
-    public void setDataHoraInicio(LocalDateTime dataHoraInicio) {
-        this.dataHoraInicio = dataHoraInicio;
-    }
-
-    public LocalDateTime getDataHoraFim() {
-        return dataHoraFim;
-    }
-
-    public void setDataHoraFim(LocalDateTime dataHoraFim) {
-        this.dataHoraFim = dataHoraFim;
-    }
-
     public String getAssunto() {
         return assunto;
     }
@@ -115,6 +101,23 @@ public class Reserva {
     public void setResponsavel(Funcionario responsavel) {
         this.responsavel = responsavel;
     }
+
+    public List<LocalDate> getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(List<LocalDate> periodo) {
+        this.periodo = periodo;
+    }
+
+    public List<LocalTime> getHorario() {
+        return horario;
+    }
+
+    public void setHorario(List<LocalTime> horario) {
+        this.horario = horario;
+    }
+    
     
 }
     

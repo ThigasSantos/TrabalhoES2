@@ -86,7 +86,9 @@ public class UserInterface {
                     fun.cadastrarFuncionario();
                 }else if(opcao == 6){
                     break;
-                }
+                }else {
+                System.out.println("Opção inválida!");
+            }
 
             } else if (opcao == 2) {
 
@@ -106,6 +108,8 @@ public class UserInterface {
                 }
                 
                 menuCampus(scanner, logado, campus);
+            }else {
+                System.out.println("Opção inválida!");
             }
         }     
     }
@@ -127,7 +131,19 @@ public class UserInterface {
             } else if (opcao == 2) {
                 res.verificarOcupacao(scanner,campus);
             } else if (opcao == 3) {
-                res.verificarDisponibilidade(scanner, campus, logado);
+                System.out.println("1. Reserva de Aula");
+                System.out.println("2. Reserva de Reunião");
+                opcao = scanner.nextInt();
+                scanner.nextLine();
+                
+                if(opcao == 1)
+                    res.realizarReservaAula(scanner, campus, logado);
+                else if(opcao == 2)
+                    res.verificarDisponibilidade(scanner, campus, logado);
+                else 
+                System.out.println("Opção inválida!");
+        
+                
             } else if (opcao == 4) {
                 res.verificarReservasFuncionario(scanner, campus, logado);
             } else if (opcao == 5) {
