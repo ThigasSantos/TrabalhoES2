@@ -171,10 +171,10 @@ public class PreencheBanco {
         
         reservas.add(new Reserva(horaInicio,horaFim,"aula",salas.get(2),null,funcionarios.get(1),TipoReserva.REUNIAO));
         
-        Funcionario func = funcionarios.get(0);
+        Funcionario func = funcionarios.get(1);
         func.addReserva(reservas.get(2));
         
-        func = funcionarios.get(1);
+        func = funcionarios.get(2);
         func.addReserva(reservas.get(0));
         func.addReserva(reservas.get(1));
         

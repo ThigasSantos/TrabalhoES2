@@ -136,7 +136,8 @@ public class ReservaControler {
             equipamento.addReserva(reserva);
         }
         
-        System.out.println("Reserva realizada com sucesso! Reserva numero:" + reserva.getId());        
+        System.out.println("Reserva realizada com sucesso! Reserva numero:" + reserva.getId());   
+        logado.addReserva(reserva);
         banco.addReserva(reserva);
     }
     
