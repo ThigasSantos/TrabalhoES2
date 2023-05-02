@@ -5,13 +5,9 @@
 package io.github.thigassantos.trabalholucio.controladores;
 
 import io.github.thigassantos.trabalholucio.PreencheBanco;
+import io.github.thigassantos.trabalholucio.classes.campus.Campus;
 import io.github.thigassantos.trabalholucio.classes.equipamento.Equipamento;
-import io.github.thigassantos.trabalholucio.classes.equipamento.tipos.EquipamentoAcessorio;
-import io.github.thigassantos.trabalholucio.classes.equipamento.tipos.EquipamentoAudio;
-import io.github.thigassantos.trabalholucio.classes.equipamento.tipos.EquipamentoImpressora3D;
-import io.github.thigassantos.trabalholucio.classes.equipamento.tipos.EquipamentoMesa;
-import io.github.thigassantos.trabalholucio.classes.equipamento.tipos.EquipamentoNotebook;
-import io.github.thigassantos.trabalholucio.classes.equipamento.tipos.EquipamentoVideo;
+import io.github.thigassantos.trabalholucio.classes.equipamento.FactoryEquipamento;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,9 +16,9 @@ import java.util.Scanner;
  * @author USER
  */
 public class EquipamentoControler {
-
-    private PreencheBanco banco = PreencheBanco.getInstance();
-            
+    
+    private LugarControler lug = new LugarControler();
+    
     public void cadastrarEquipamento(){
         Scanner scanner = new Scanner(System.in);
                             
@@ -38,150 +34,24 @@ public class EquipamentoControler {
         int opcao = scanner.nextInt();
         scanner.nextLine();
         
-            if (opcao == 1) { 
-                cadastrarEquipamentoAudio(scanner);
-            } else if (opcao == 2) {               
-                cadastrarEquipamentoVideo(scanner);
-            } else if (opcao == 3) {
-                cadastrarEquipamentoNotebook(scanner);
-            } else if (opcao == 4) {
-                cadastrarEquipamentoImpressora3D(scanner);
-            } else if (opcao == 5) {
-                cadastrarEquipamentoMesas(scanner);
-            } else if (opcao == 6) {
-                cadastrarEquipamentoAcessorio(scanner);
-            }else if (opcao == 7) {
-                return;
-            } else {
-                System.out.println("Opção inválida!");
+        System.out.println("Esse equipamento irá para qual campus ?");
+        String nomeCampus = scanner.nextLine();
+        
+        Campus campus = lug.buscarCampus(nomeCampus);
+                
+        while(true){
+            if(campus == null){
+                System.out.println("Campus incorreto tente novamente:");
+                nomeCampus = scanner.nextLine();   
+                campus = lug.buscarCampus( nomeCampus);
+            }else
+                break;           
             }
-            System.out.println();        
+        
+        FactoryEquipamento fac = new FactoryEquipamento(opcao, scanner, campus);
     }
     
-    public void cadastrarEquipamentoAudio(Scanner scanner){
-        
-        System.out.println("Digite o nome do equipamento");
-        String nome = scanner.nextLine();
-        
-        // validações adicionais
-        if (nome.isEmpty()) {
-            System.out.println("O nome do equipamento é obrigatório.");
-            return;
-        }
-        
-        System.out.println("Digite a potencia do equipamento:");
-        int potencia = scanner.nextInt();
-        scanner.nextLine();      
-        
-        EquipamentoAudio eqp = new EquipamentoAudio(nome,potencia);
-        banco.addEquipamento(eqp);
-        System.out.println("Equipamento cadastrado com sucesso!");
-    }
-    
-    public void cadastrarEquipamentoVideo(Scanner scanner){
-        
-        System.out.println("Digite o nome do equipamento");
-        String nome = scanner.nextLine();
-        
-        // validações adicionais
-        if (nome.isEmpty()) {
-            System.out.println("O nome do equipamento é obrigatório.");
-            return;
-        }
-        
-        System.out.println("Digite a marca do equipamento:");
-        String marca = scanner.nextLine(); 
-        
-        EquipamentoVideo eqp = new EquipamentoVideo(nome,marca);
-        banco.addEquipamento(eqp);
-        System.out.println("Equipamento cadastrado com sucesso!");
-    }
-    
-    public void cadastrarEquipamentoNotebook(Scanner scanner){
-        
-        System.out.println("Digite o nome do equipamento");
-        String nome = scanner.nextLine();
-        // validações adicionais
-        if (nome.isEmpty()) {
-            System.out.println("O nome do equipamento é obrigatório.");
-            return;
-        }
-        
-        System.out.println("Digite a marca do equipamento:");
-        String marca = scanner.nextLine(); 
-        
-        System.out.println("Digite o modelo:");
-        String modelo = scanner.nextLine();
-        
-        System.out.println("Digite o tamanho da tela:");
-        double tamanhoTela = scanner.nextDouble();
-        scanner.nextLine();
-        
-        System.out.println("Quantidade de memoria RAM:");
-        int memRam = scanner.nextInt();
-        scanner.nextLine();
-        
-        EquipamentoNotebook eqp = new EquipamentoNotebook(nome,marca,modelo,tamanhoTela,memRam);
-        banco.addEquipamento(eqp);
-        System.out.println("Equipamento cadastrado com sucesso!");
-    }
-    
-    public void cadastrarEquipamentoImpressora3D(Scanner scanner){
-        
-        System.out.println("Digite o nome do equipamento");
-        String nome = scanner.nextLine();
-        // validações adicionais
-        if (nome.isEmpty()) {
-            System.out.println("O nome do equipamento é obrigatório.");
-            return;
-        }
-        
-        System.out.println("Digite a marca do equipamento:");
-        String marca = scanner.nextLine(); 
-        
-        System.out.println("Digite a resolução maxima da impressora:");
-        int res = scanner.nextInt();
-        scanner.nextLine();
-        
-        EquipamentoImpressora3D eqp = new EquipamentoImpressora3D(nome,marca,res);
-        banco.addEquipamento(eqp);
-        System.out.println("Equipamento cadastrado com sucesso!");
-    }
-    
-    public void cadastrarEquipamentoMesas(Scanner scanner){
-        
-        System.out.println("Digite o nome do equipamento");
-        String nome = scanner.nextLine();
-        // validações adicionais
-        if (nome.isEmpty()) {
-            System.out.println("O nome do equipamento é obrigatório.");
-            return;
-        }
-        
-        System.out.println("Digite a altura da mesa:");
-        int alt = scanner.nextInt();
-        scanner.nextLine();
-        
-        EquipamentoMesa eqp = new EquipamentoMesa(nome,alt);
-        banco.addEquipamento(eqp);
-        System.out.println("Equipamento cadastrado com sucesso!");
-    }
-    
-    public void cadastrarEquipamentoAcessorio(Scanner scanner){
-        
-        System.out.println("Digite o nome do equipamento");
-        String nome = scanner.nextLine();
-        // validações adicionais
-        if (nome.isEmpty()) {
-            System.out.println("O nome do equipamento é obrigatório.");
-            return;
-        }
-        
-        EquipamentoAcessorio eqp = new EquipamentoAcessorio(nome);
-        banco.addEquipamento(eqp);
-        System.out.println("Equipamento cadastrado com sucesso!");
-    }
-    
+
     public boolean existeEquipamento(List<Equipamento> equipamentos,String nome){
         for (Equipamento equipamento : equipamentos) {
         if (equipamento.getNome().equals(nome)) {
